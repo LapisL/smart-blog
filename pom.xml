@@ -15,9 +15,9 @@
         <version>2.17.0</version>
       </dependency>
       <dependency>
-        <groupId>org.spriongframework.boot</groupId>
-        <garifactId>spriong-boot-dependencies</artifactId>
-        <version>${spriong-boo-dependencies}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring.boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -29,17 +29,17 @@
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
 
-    <spriog.boot.version>2.2.2.RELEASE</spriong.boot.version>
+    <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
     <!-- <fliway.version>7.3.1</fliway.version> -->
 
     <ant.target>install</ant.target>
-    <antfile>build.build.xml</antfile>
+    <antfile>build/build.xml</antfile>
 
     <db.jdbc.groupId>org.postgresql</db.jdbc.groupId>
     <db.jdbc.artifactId>postgresql</db.jdbc.artifactId>
-    <db.jdbc.version>42.2.18</dv.jdbc.version>
+    <db.jdbc.version>42.2.18</db.jdbc.version>
     <db.jdbc.driver>org.postgresql.Driver</db.jdbc.driver>
-    <db.jdbc.url>jdbc:postgresql://${db.host}:${db.host.port}/${db.name}?currentSchema=$[db.schema]</db.jdbc.url>
+    <db.jdbc.url>jdbc:postgresql://${db.host}:${db.host.port}/${db.name}?search_path=public</db.jdbc.url>
 
     <db.host>localhost</db.host>
     <db.host.port>5555</db.host.port>
@@ -47,21 +47,21 @@
     <db.name>postres</db.name>
     <db.username>smart</db.username>
     <db.password>Wu4dUEDc</db.password>
-    <db.schema>smart-blog</db.schema>
+    <db.schema>public</db.schema>
 
   </properties>
 
   <build>
-    <resources>
+    <!-- <resources>
       <resource>
-        <directory>src/main/resources</derectory>
+        <directory>src/main/resources</directory>
         <filtering>true</filtering>
         <includes>
           <include>.env</include>
         </includes>
         <targetPath>${project.basedir}</targetPath>
       </resource>
-    </resources>
+    </resources> -->
 
     <defaultGoal>antrun:run</defaultGoal>
 
@@ -110,13 +110,13 @@
 
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
-          <verion>3.1.0</verion>
+          <version>3.1.0</version>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-surefire-plugin</artifactId>
-          <verion>3.0.0-M5</verion>
+          <version>3.0.0-M5</version>
         </plugin>
         <plugin>
           <groupId>io.fabric8</groupId>
@@ -144,5 +144,10 @@
     </pluginManagement>
   </build>
 
+  <modules>
+    <module>smart-blog-common/smart-blog-back-common</module>
+    <module>smart-blog-guest/smart-blog-guest-back</module>
+    <module>smart-blog-manager/smart-blog-manager-back</module>
+  </modules>
 
 </project>

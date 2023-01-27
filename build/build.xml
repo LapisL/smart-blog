@@ -1,15 +1,15 @@
-<project xmlns:if="ant:if" xmlns:unless="unless" name="smart-blog" basedir-".">
+<project xmlns:if="ant:if" xmlns:unless="ant:unless" name="smart-blog" basedir=".">
   <condition property="mvn.cmd" value="${basedir}\mvnw.cmd" else="${basedir}\mvnw">
     <os family="windows" />
   </condition>
 
-  <taskdef resource="net/st/antcontrib/antlib.xml" />]
+  <taskdef resource="net/sf/antcontrib/antlib.xml" />
 
   <condition property="os" value="win" else="mac">
     <os family="windows" />
   </condition>
 
-  <condition property="mvn.cmd" value="${basedir}\mvnw">
+  <condition property="mvn.cmd" value="${basedir}\mvnw.cmd" else="${basedir}\mvnw">
     <os family="windows" />
   </condition>
 
@@ -18,16 +18,82 @@
   </exec>
 
   <condition property="docker.installed">
-    <equals argl="${docker.ret}" arg2="0" />
+    <equals arg1="${docker.ret}" arg2="0" />
   </condition>
 
-  <property name="targets" value="manager, gest" />
+  <property name="targets" value="manager, guest" />
   <property name="maven.test.skip" value="true" />
 
   <target name="install">
+    <antcall target="init-local-git" />
+    <antcall target="init-container" />
+
+    <antcall target="exec-migration">
+      <param name="mig.profile" value="clean,migrate" />
+      <param name="mig.target" value="-Ddb.local.migtarget=/db/migration/common" />
+    </antcall>
+    <antcall target="exec-migration">
+      <param name="mig.profile" value="clean,migrate" />
+      <param name="mig.target" value="" />
+  </antcall>
 
     <exec executable="${mvn.cmd}" failonerror="true">
       <arg line="install -Dmavan.test.skip=${maven.test.skip}" />
+    </exec>
+  </target>
+
+  <target name="init-local-git">
+    <exec executable="git" failonerror="true">
+      <arg line="config --local core.hooksPath ${deploy.srcdir}/.githooks" />
+    </exec>
+    <exec executable="git" failonerror="true">
+      <arg line="config --local core.autocrlf false" />
+    </exec>
+  </target>
+
+  <target name="init-container" if="docker.installed" unless="skip-init-container">
+    <condition property="port.arg" value="-Ddb.host.port=40001-40100 -Dweb.port=40101-40200 -Dmailhog.smtp.port=40201-40300 -Dmailhog.web.port=40301-40400" else="">
+      <equals arg1="${port.random}" arg2="true" />
+    </condition>
+
+    <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="clean" />
+    </exec>
+    <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="process-resources -N ${port.arg}" />
+    </exec>
+
+    <exec executable="docker-compose" failonerror="true">
+      <arg line="up -d --scale wait=0" />
+    </exec>
+    <exec executable="docker-compose" failonerror="true">
+      <arg line="run --rm -T wait dockerize -wait tcp://dbms:${db.container.port} -timeout 120s" />
+    </exec>
+  </target>
+
+  <target name="migrate">
+    <antcall target="exec-migration">
+      <param name="mig.profile" value="migrate" />
+      <param name="mig.target" value="" />
+    </antcall>
+  </target>
+
+  <target name="exec-migration">
+    <if>
+      <equals arg1="${skip-init-container}" arg2="true" />
+      <then>
+        <property name="db.port.current" value="${db.container.port}" />
+      </then>
+      <else>
+        <exec executable="docker-compose" failonerror="true" outputproperty="db.postport">
+          <arg line="port dbms ${db.container.port}" />
+        </exec>
+        <propertyregex property="db.port.current" input="${db.postport}" regexp=".*:" replace="" global="true" override="true" />
+      </else>
+    </if>
+    <exec executable="${mvn.cmd}" failonerror="true">
+      <arg line="-f smart-blog-common/smart-blog-back-common flyway:clean" />
+      <arg line="-f smart-blog-common/smart-blog-back-common flyway:migrate" />
     </exec>
   </target>
 
