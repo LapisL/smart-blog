@@ -16,7 +16,7 @@ import lombok.Data;
 public class PostsEntity {
 
     @Id
-    @Column(name = "posts_id")
+    @Column(name = "post_id")
     private int postId;
 
     @Column(name = "author")
@@ -28,7 +28,7 @@ public class PostsEntity {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "content_date")
+    @Column(name = "contents_date")
     private Date contentDate;
 
     @Column(name = "post_status")

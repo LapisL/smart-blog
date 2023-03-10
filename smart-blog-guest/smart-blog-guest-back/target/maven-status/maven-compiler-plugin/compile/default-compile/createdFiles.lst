@@ -1,7 +1,7 @@
 com/blog/guest/domain/posts/PostsController.class
 com/blog/guest/domain/posts/PostsService.class
 com/blog/guest/domain/posts/PostsRepository.class
-com/blog/guest/domain/application/BlogService.class
+com/blog/guest/config/ApplicationConfig.class
 com/blog/guest/domain/posts/dto/PostsDto.class
 com/blog/guest/domain/posts/PostsFactory.class
 com/blog/SmartBlogGuestBackApp.class
