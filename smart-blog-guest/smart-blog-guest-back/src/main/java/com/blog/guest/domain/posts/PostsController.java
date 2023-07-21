@@ -29,8 +29,8 @@ public class PostsController {
     }
 
     //一件取得
-    @GetMapping("article/[id]")
-    public PostsDto getArticle(@PathVariable int postId){
+    @GetMapping("/{id}")
+    public PostsDto getArticle(@PathVariable("id") int postId){
         return postsFactory.createArticleResponse(postsService.getPost(postId));
     }
 

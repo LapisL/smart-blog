@@ -12,10 +12,10 @@ import com.blog.entity.posts.PostsEntity;
 public interface PostsRepository extends CrudRepository<PostsEntity, Integer> {
 
     @Query(
-        value =
-            "SELECT"
-              + "DISTINCT posts "
-              + "FROEM "
-              + "PostsEntity post")
+        value = 
+          "SELECT "
+            + "DISTINCT posts "
+            + "FROM "
+            + "PostsEntity posts")
     public List<PostsEntity> findAllOrderByAsc();
 }

@@ -23,6 +23,13 @@ CREATE TABLE users (
     ${commonColumns}
 );
 
+INSERT INTO public.posts
+(post_id, author, title, "content", contents_date, post_status, created_date, created_by, updated_date, updated_by, "version")
+VALUES(1, 'test', 'タイトル', 'コンテンツ', NULL, 'draft', '2023-01-06 19:37:46.588', 'system', '2023-01-06 19:37:46.588', 'system', 0);
+
+INSERT INTO public.posts
+(post_id, author, title, "content", contents_date, post_status, created_date, created_by, updated_date, updated_by, "version")
+VALUES(2, 'test2', 'タイトル2', 'コンテンツ2', NULL, 'draft', '2023-01-06 19:37:46.588', 'system', '2023-01-06 19:37:46.588', 'system', 0);
 
 -- alter table add constraint pk
 ALTER TABLE ONLY posts
@@ -30,4 +37,5 @@ ALTER TABLE ONLY posts
 
 ALTER TABLE ONLY users
     ADD CONSTRAINT user_pkey PRIMARY KEY (user_id);
+
 

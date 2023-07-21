@@ -39,12 +39,12 @@
     <db.jdbc.artifactId>postgresql</db.jdbc.artifactId>
     <db.jdbc.version>42.2.18</db.jdbc.version>
     <db.jdbc.driver>org.postgresql.Driver</db.jdbc.driver>
-    <db.jdbc.url>jdbc:postgresql://${db.host}:${db.host.port}/${db.name}?search_path=public</db.jdbc.url>
+    <db.jdbc.url>jdbc:postgresql://${db.host}:${db.host.port}/${db.name}?currentSchema=public</db.jdbc.url>
 
     <db.host>localhost</db.host>
     <db.host.port>5555</db.host.port>
     <db.container.port>5432</db.container.port>
-    <db.name>postres</db.name>
+    <db.name>postgres</db.name>
     <db.username>smart</db.username>
     <db.password>Wu4dUEDc</db.password>
     <db.schema>public</db.schema>
