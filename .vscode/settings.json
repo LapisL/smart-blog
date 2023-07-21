@@ -1,4 +1,38 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive",
-    "java.compile.nullAnalysis.mode": "automatic"
+  // UIの非表示
+  "breadcrumbs.enabled": false,
+  "editor.codeLens": false,
+  "editor.minimap.enabled": false,
+  "workbench.statusBar.visible": false,
+
+  // UIの細かい変更
+  "editor.glyphMargin": false,
+  "editor.folding": false,
+  "workbench.colorCustomizations": {
+    "editor.lineHighlightBackground": "#222",
+    "editorLineNumber.foreground": "#1e1e1e",
+    "editorLineNumber.activeForeground": "#555"
+  },
+
+  // lint系に関する設定
+  "eslint.validate": ["javascript", "typescript", "json"],
+  "css.validate": false,
+  "stylelint.enable": true,
+  "editor.formatOnSave": true,
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // その他
+  "editor.emptySelectionClipboard": false,
+  "editor.renderControlCharacters": true,
+  "editor.tabSize": 2,
+  "workbench.editor.enablePreview": false,
+  "workbench.iconTheme": "material-icon-theme",
+  "files.exclude": {},
+  "editor.guides.indentation": false
 }

@@ -1,0 +1,7 @@
+{
+  "folders": [
+    { "path": "./" },
+    { "path": "./smart-blog-guest/smart-blog-guest-front-v2" },
+    { "path": "./smart-blog-manager/smart-blog-guest-back" }
+  ]
+}
