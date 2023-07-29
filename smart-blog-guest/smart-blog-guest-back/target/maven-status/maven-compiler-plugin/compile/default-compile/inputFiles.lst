@@ -1,7 +1,0 @@
-/Users/daisuke/docker/smart-blog/smart-blog-guest/smart-blog-guest-back/src/main/java/com/blog/guest/config/ApplicationConfig.java
-/Users/daisuke/docker/smart-blog/smart-blog-guest/smart-blog-guest-back/src/main/java/com/blog/guest/domain/posts/PostsFactory.java
-/Users/daisuke/docker/smart-blog/smart-blog-guest/smart-blog-guest-back/src/main/java/com/blog/SmartBlogGuestBackApp.java
-/Users/daisuke/docker/smart-blog/smart-blog-guest/smart-blog-guest-back/src/main/java/com/blog/guest/domain/posts/PostsService.java
-/Users/daisuke/docker/smart-blog/smart-blog-guest/smart-blog-guest-back/src/main/java/com/blog/guest/domain/posts/PostsController.java
-/Users/daisuke/docker/smart-blog/smart-blog-guest/smart-blog-guest-back/src/main/java/com/blog/guest/domain/posts/dto/PostsDto.java
-/Users/daisuke/docker/smart-blog/smart-blog-guest/smart-blog-guest-back/src/main/java/com/blog/guest/domain/posts/PostsRepository.java
